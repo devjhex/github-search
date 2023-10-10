@@ -1,17 +1,16 @@
-let token = "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";
 
-let base_url = 'https://api.github.com/users/';
-let input = document.getElementById("input");
-let search = document.getElementById("search");
-let card = document.getElementById("card");
+const base_url = 'https://api.github.com/users/';
+const input = document.getElementById("input");
+const search = document.getElementById("search");
+const card = document.getElementById("card");
 
 
 search.addEventListener('click',function(){
-    if (input.value) {
-        console.log(input.value);
-        let request = new Request(`${base_url}${input.value}`,{
+    let name = input.value;
+    if (name) {
+        let noSpace = name.split(' ').join(''); 
+        let request = new Request(`${base_url}${noSpace}`,{
             headers:{
-                'Authorization':'token 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',
                 'Accept':'application/vnd.github+json',
                 'X-Github-Api-Version':'2022-11-28'
             },
@@ -37,7 +36,6 @@ search.addEventListener('click',function(){
         </ul>
     </div>`;
     card.innerHTML = output;
-        console.log(dataObj);
     })
     .catch(err=>{
         console.warn(err.message);
